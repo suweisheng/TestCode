@@ -1,8 +1,5 @@
 local M = {}
 
------------------------------------------------- some function tools
-
-
 ------------------------------------------------ some sort function
 function M.bubble(list)
     for i=1, #list-1 do
@@ -245,16 +242,47 @@ local function shuffle(tb)
     return tb
 end
 
+local function count_running_time(cb_func)
+    local t0 = os.clock()
+    cb_func()
+    local t1 = os.clock()
+    return t1 - t0
+end
+
+local function sleep(n)
+    if n > 0 then
+        os.execute("ping -n " .. tonumber(n + 1) .. " localhost > NUL")
+    end
+end
+
 local function test()
     local test_list = {-3, 0, 2, 2, 9, 4, 3, 8, 1, 7, -4, -8, 6, 5, }
-    print_list(M.bubble(copy(test_list)))
-    print_list(M.choise(copy(test_list)))
-    print_list(M.insert(copy(test_list)))
-    print_list(M.quick(copy(test_list)))
-    print_list(M.merge(copy(test_list)))
-    print_list(M.shell(copy(test_list)))
-    print_list(M.heap(copy(test_list)))
-    print_list(M.binary(copy(test_list)))
+    -- local test_list = {}
+    -- for i=1, 100000 do
+    --     table.insert(test_list, i)
+    -- end
+    -- shuffle(test_list)
+
+    -- print_list(M.bubble(copy(test_list)))
+    -- print_list(M.choise(copy(test_list)))
+    -- print_list(M.insert(copy(test_list)))
+    -- print_list(M.quick(copy(test_list)))
+    -- print_list(M.merge(copy(test_list)))
+    -- print_list(M.shell(copy(test_list)))
+    -- print_list(M.heap(copy(test_list)))
+    -- print_list(M.binary(copy(test_list)))
+    ---------------------------------------------- time compare
+    -- print("bubble -> "..count_running_time(function() M.bubble(copy(test_list)) end).." s")
+    -- print("choise -> "..count_running_time(function() M.choise(copy(test_list)) end).." s")
+    -- print("insert -> "..count_running_time(function() M.insert(copy(test_list)) end).." s")
+    -- print("quick -> "..count_running_time(function() M.quick(copy(test_list)) end).." s")
+    -- print("merge -> "..count_running_time(function() M.merge(copy(test_list)) end).." s")
+    -- print("shell -> "..count_running_time(function() M.shell(test_list) end).." s")
+    -- print("heap -> "..count_running_time(function() M.heap(test_list) end).." s")
+    -- print("binary -> "..count_running_time(function() M.binary(test_list) end).." s")
+    ----------------------------------------------
+    -- print(count_running_time(function() sleep(1) end))
+
     print("test success !")
 end
 

@@ -129,6 +129,7 @@ def searchMatrix():
     编写一个高效的算法来搜索 m x n 矩阵 matrix 中的一个目标值 target。该矩阵具有以下特性：
     每行的元素从左到右升序排列。
     每列的元素从上到下升序排列。
+    https://leetcode-cn.com/problems/search-a-2d-matrix-ii/solution/sou-suo-er-wei-ju-zhen-ii-by-leetcode-2/
     '''
     array = [
         [1, 4, 7, 11, 15],
@@ -137,10 +138,84 @@ def searchMatrix():
         [10, 13, 14, 17, 24],
         [18, 21, 23, 26, 30],
     ]
+    value = 13
+    # ==>>> mine
+    # for x in xrange(len(array)):
+    #     for y in xrange(len(array[x])):
+    #         if array[x][y] == value:
+    #             print x, y
+    #             break
+    # ==>>> other
+    # 选左上角，往右走和往下走都增大，不能选
+    # 选右下角，往上走和往左走都减小，不能选
+    # 选左下角，往右走增大，往上走减小，可选
+    # 选右上角，往下走增大，往左走减小，可选
+    i = len(array)-1
+    j = 0
+    while (i >= 0 and j <= len(array)-1):
+        if value == array[i][j]:
+            print i, j
+            break
+        elif value > array[i][j]:
+            j += 1
+        else:
+            i -= 1
+
+def mergeTree():
+    '''
+    给你两个有序整数数组 nums1 和 nums2，请你将 nums2 合并到 nums1 中，使 nums1 成为一个有序数组。
+    https://leetcode-cn.com/problems/merge-sorted-array/solution/he-bing-liang-ge-you-xu-shu-zu-by-leetcode/
+    '''
+
+    nums1 = [1,2,3,0,0,0]
+    m = 3
+    nums2 = [2,5,6]
+    n = 3
+    # ==>>> mine
+    # temp_nums1 = nums1[:3]
+    # nums1[:] = []
+    # i = 0
+    # j = 0
+    # while i < m and j < n:
+    #     if temp_nums1[i] <= nums2[j]:
+    #         nums1.append(temp_nums1[i])
+    #         i += 1
+    #     else:
+    #         nums1.append(nums2[j])
+    #         j += 1
+    # if i < m:
+    #     nums1[i+j:] = temp_nums1[i:]
+    # if j < n:
+    #     nums1[i+j:] = nums2[j:]
+
+    # ==>>> other
+    # 双指针 / 从后往前
+    # 之前取得了最优的时间复杂度O(n + m)，但需要使用额外空间。这是由于在从头改变nums1的值时，需要把nums1中的元素存放在其他位置。
+    # // 三指针 指针一p1、nums1有效元素尾部；指针二p2、nums2尾部；指针三p3、最终数组尾部
+    # // 1.当，p1>=0时，nums[p1],nums[p2]对比
+    # // 1.1 nums[p1]大，将nums[p1]放入p3位置。p1--,p3--
+    # // 1.2 nums[p2]大于等于nums[p1]，将nums[p2]放入p3位置。p2--,p3--
+    # // 2.当，p1<0时，将nums[p2]放入p3位置。p2--,p3--
+    # // 循环结束条件：p2<0
+    p1 = m - 1
+    p2 = n - 1
+    p = m + n -1
+    while p1 >= 0 and p2 >= 0:
+        if nums1[p1] < nums2[p2]:
+            nums1[p] = nums2[p2]
+            p2 -= 1
+        else:
+            nums1[p] = nums1[p1]
+            p1 -= 1
+        p -= 1
+    nums1[:p2+1] = nums2[:p2+1]
+
+
 
 
 
 if __name__ == "__main__":
     # print count_running_time(singleNumber)
     # print count_running_time(majorityElement)
-    print count_running_time(searchMatrix)
+    # print count_running_time(searchMatrix)
+    print count_running_time(mergeTree)

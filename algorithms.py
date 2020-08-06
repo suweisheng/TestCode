@@ -16,6 +16,21 @@ import time
     enumerate(seq, start) 生成一个序列迭代器,带key-val的元表
 '''
 
+'''
+你将获得 K 个鸡蛋，并可以使用一栋从 1 到 N  共有 N 层楼的建筑。
+每个蛋的功能都是一样的，如果一个蛋碎了，你就不能再把它掉下去。
+你知道存在楼层 F ，满足 0 <= F <= N 任何从高于 F 的楼层落下的鸡蛋都会碎，从 F 楼层或比它低的楼层落下的鸡蛋都不会破。
+每次移动，你可以取一个鸡蛋（如果你有完整的鸡蛋）并把它从任一楼层 X 扔下（满足 1 <= X <= N）。
+你的目标是确切地知道 F 的值是多少。
+无论 F 的初始值如何，你确定 F 的值的最小移动次数是多少？
+'''
+# k = 1
+# n = 2
+
+# ==>>> mine
+
+# ==>>> other
+
 def loop_list():
     raw_list = ['html', 'js', 'css', 'python']
     # method 1
@@ -210,6 +225,55 @@ def mergeTree():
         p -= 1
     nums1[:p2+1] = nums2[:p2+1]
 
+def superEggDrop():
+    '''
+    你将获得 K 个鸡蛋，并可以使用一栋从 1 到 N  共有 N 层楼的建筑。
+    每个蛋的功能都是一样的，如果一个蛋碎了，你就不能再把它掉下去。
+    你知道存在楼层 F ，满足 0 <= F <= N 任何从高于 F 的楼层落下的鸡蛋都会碎，从 F 楼层或比它低的楼层落下的鸡蛋都不会破。
+    每次移动，你可以取一个鸡蛋（如果你有完整的鸡蛋）并把它从任一楼层 X 扔下（满足 1 <= X <= N）。
+    你的目标是确切地知道 F 的值是多少。
+    无论 F 的初始值如何，你确定 F 的值的最小移动次数是多少？
+    
+    https://leetcode-cn.com/problems/super-egg-drop/solution/ji-dan-diao-luo-by-leetcode-solution-2/
+    '''
+    K = 1
+    N = 2
+    # ==>>> mine
+    # ==>>> other
+    def _superEggDrop(k, n):
+        memo = dict() # 记录每个状态的值
+        def dp(k, n):
+            # 如果鸡蛋个数只有1个，则只能从1到N一层一层楼的试，最坏情况最少需要N次
+            if k == 1: return n
+            # 如果需要扔的楼层数为0，表示已经不需要扔了，之前的结果已经确定了，本次返回0
+            if n == 0: return 0
+
+            # 方法一，穷举所有可能的选择
+            # res = n
+            # for i in range(1, n+1):
+            #     res = min(res, max(dp(k, n-i), dp(k-1, i-1)) + 1)
+            # memo[(k, n)] = res
+            # return res
+
+            # 方法二，二分查找, 两条线单调递增或递减，具备单调性
+            lo, hi = 1, n
+            res = n
+            while lo <= hi:
+                mid = (lo + hi) // 2
+                broken = dp(k - 1, mid - 1)
+                not_broken = dp(k, n - mid)
+                # res = min(max(碎，没碎) + 1)
+                if broken > not_broken:
+                    hi = mid - 1
+                    res = min(res, broken + 1)
+                else:
+                    lo = mid + 1
+                    res = min(res, not_broken + 1)
+
+            memo[(k, n)] = res
+            return res
+
+        return dp(k, n)
 
 
 
@@ -218,4 +282,6 @@ if __name__ == "__main__":
     # print count_running_time(singleNumber)
     # print count_running_time(majorityElement)
     # print count_running_time(searchMatrix)
-    print count_running_time(mergeTree)
+    # print count_running_time(mergeTree)
+    # print count_running_time(superEggDrop)
+    

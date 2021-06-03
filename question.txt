@@ -1,0 +1,27 @@
+LeetCode 精选 TOP 面试题
+https://leetcode-cn.com/problem-list/2ckc81c/
+https://leetcode.com/problemset/top-interview-questions/
+
+1.两数之和 twoSum
+思路：（https://leetcode-cn.com/problems/two-sum/solution/liang-shu-zhi-he-by-le
+etcode-solution/）
+
+7.整数反转 reverse
+思路：（https://leetcode-cn.com/problems/reverse-integer/solution/zheng-shu-fan-z
+huan-by-leetcode-solution-bccn/）
+
+14. 最长公共前缀 longestCommonPrefix
+思路：（https://leetcode-cn.com/problems/longest-common-prefix/solution/zui-chang
+-gong-gong-qian-zhui-by-leetcode-solution/）
+
+20. 有效的括号 isValid
+思路：（https://leetcode-cn.com/problems/valid-parentheses/solution/you-xiao-de-
+gua-hao-by-leetcode-solution/）
+
+66. 加一 plusOne
+思路：（https://leetcode-cn.com/problems/plus-one/solution/java-shu-xue-jie-ti-by
+-yhhzw/）
+
+21. 合并两个有序链表
+思路：（https://leetcode-cn.com/problems/merge-two-sorted-lists/solution/he-bing-
+liang-ge-you-xu-lian-biao-by-leetcode-solu/）

@@ -185,3 +185,90 @@ class Solution(object):
 # while ret:
 #     print ret.val
 #     ret = ret.next
+
+class Solution(object):
+    def defangIPaddr(self, address):
+        """
+        :type address: str
+        :rtype: str
+        """
+        new_str = ""
+        for x in address:
+            if x == ".":
+                new_str = new_str + "[.]"
+            else:
+                new_str = new_str + x
+        return new_str
+# address = "1.1.1.1"
+# ret = Solution().defangIPaddr(address)
+# print ret
+
+class Solution(object):
+    def addTwoNumbers(self, l1, l2):
+        """
+        :type l1: ListNode
+        :type l2: ListNode
+        :rtype: ListNode
+        """
+        head = curr = ListNode(-1)
+        carry = val = 0
+        while carry or l1 or l2:
+            val = carry
+            if l1:
+                l1, val = l1.next, l1.val + val
+            if l2:
+                l2, val = l2.next, l2.val + val
+            carry, val = divmod(val, 10)
+            curr.next = ListNode(val)
+            curr = curr.next
+            # curr.next = curr = ListNode(val)
+        return head.next
+# l1 = BuildListNode([1,4,8,5,3,2])
+# l2 = BuildListNode([1,2,3,4,5,6,1,0,5])
+# ret = Solution().addTwoNumbers(l1, l2)
+# while ret:
+#     print ret.val
+#     ret = ret.next
+
+class Solution(object):
+    def lengthOfLongestSubstring(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        ############################## method 1
+        # length = len(s)
+        # l_max = 0
+        # for i in xrange(length):
+        #     mapp = set(s[i])
+        #     temp = 1
+        #     for j in xrange(i+1, length):
+        #         if s[j] in mapp:
+        #             break
+        #         else:
+        #             temp = temp + 1
+        #             mapp.add(s[j])
+        #     if temp > l_max:
+        #         l_max = temp
+        # return l_max
+        ############################## method 2
+        l, r = 0, 0
+        length = 0
+        mapp = set()
+        while r < len(s):
+            if s[r] in mapp:
+                # 左指针移动
+                mapp.remove(s[l])
+                l += 1
+            else:
+                # 右指针移动
+                mapp.add(s[r])
+                r += 1
+            # 每次记录最大长度
+            if r - l > length:
+                length = r - l
+            # length = max(r-i, length)
+        return length
+# s = "abcabcbb"
+# ret = Solution().lengthOfLongestSubstring(s)
+# print ret

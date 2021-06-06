@@ -1,3 +1,6 @@
+usr: chazpy39217@chacuo.net
+paw: qwe12345
+
 LeetCode 精选 TOP 面试题
 https://leetcode-cn.com/problem-list/2ckc81c/
 https://leetcode.com/problemset/top-interview-questions/
@@ -25,3 +28,15 @@ gua-hao-by-leetcode-solution/）
 21. 合并两个有序链表
 思路：（https://leetcode-cn.com/problems/merge-two-sorted-lists/solution/he-bing-
 liang-ge-you-xu-lian-biao-by-leetcode-solu/）
+
+1108. IP 地址无效化
+思路：（https://leetcode-cn.com/problems/defanging-an-ip-address/solution/1108-ip
+-di-zhi-wu-xiao-hua-jsti-jie-by-s-rzxp/）
+
+2. 两数相加
+思路：（https://leetcode-cn.com/problems/add-two-numbers/solution/liang-shu-xiang
+-jia-by-leetcode-solution/）
+
+3. 无重复字符的最长子串
+思路：（https://leetcode-cn.com/problems/longest-substring-without-repeating-char
+acters/solution/wu-zhong-fu-zi-fu-de-zui-chang-zi-chuan-by-leetc-2/）

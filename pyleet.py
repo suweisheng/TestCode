@@ -186,6 +186,66 @@ class Solution(object):
 #     print ret.val
 #     ret = ret.next
 
+    def strStr(self, haystack, needle):
+        """
+        :type haystack: str
+        :type needle: str
+        :rtype: int
+        """
+        ############################## method 1
+        # 暴力法
+        n_len = len(needle)
+        if n_len == 0:
+            return 0
+        h_len = len(haystack)
+        for i in xrange(h_len-n_len+1):
+            flag = True
+            for j in xrange(n_len):
+                if haystack[i+j] != needle[j]:
+                    flag = False
+                    break
+            if flag:
+                return i
+        return -1
+        ############################## method 2
+        # 双指针法
+        n_len = len(needle)
+        h_len = len(haystack)
+        for i in xrange(h_len-n_len+1):
+            a = i; b = 0
+            while b < n_len and haystack[a] == needle[b]:
+                a += 1
+                b += 1
+            if b == (n_len-1):
+                return i
+        return -1
+# haystack = "fduhf"
+# needle = "hf"
+# ret = Solution().strStr(haystack, needle)
+# print ret
+
+class Solution(object):
+    def mySqrt(self, x):
+        """
+        :type x: int
+        :rtype: int
+        """
+        ############################## method 1
+        # 二分查找
+        left, right = 0, x
+        ans = -1
+        while left <= right:
+            mid = (left + right) // 2
+            if mid * mid <= x:
+                left = mid + 1
+                ans = mid
+            else:
+                right = mid - 1
+        return ans
+# x = 10
+# ret = Solution().mySqrt(x)
+# print ret
+
 class Solution(object):
     def defangIPaddr(self, address):
         """
@@ -272,3 +332,4 @@ class Solution(object):
 # s = "abcabcbb"
 # ret = Solution().lengthOfLongestSubstring(s)
 # print ret
+

@@ -48,3 +48,7 @@ tcode-solution/）
 3. 无重复字符的最长子串
 思路：（https://leetcode-cn.com/problems/longest-substring-without-repeating-char
 acters/solution/wu-zhong-fu-zi-fu-de-zui-chang-zi-chuan-by-leetc-2/）
+
+26. 删除有序数组中的重复项
+思路：（https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array/solu
+tion/shan-chu-pai-xu-shu-zu-zhong-de-zhong-fu-tudo/）

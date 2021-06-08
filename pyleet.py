@@ -333,3 +333,36 @@ class Solution(object):
 # ret = Solution().lengthOfLongestSubstring(s)
 # print ret
 
+class Solution(object):
+    def removeDuplicates(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        ############################## method 1
+        # num = None
+        # i = length = 0
+        # while i < len(nums):
+        #     if num == nums[i]:
+        #         nums.pop(i)
+        #     else:
+        #         num = nums[i]
+        #         i += 1
+        #         length += 1
+        # return length
+        ############################## method 2
+        # 双指针
+        if not nums:
+            return 0
+        n = len(nums)
+        slow = fast = 1
+        while fast < n:
+            if nums[fast] != nums[fast-1]:
+                nums[slow] = nums[fast]
+                slow += 1
+            fast += 1
+        return slow
+# nums = [1,1,1,2,3,4,5,5]
+# ret = Solution().removeDuplicates(nums)
+# print ret
+# print nums

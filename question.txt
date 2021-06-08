@@ -29,7 +29,14 @@ gua-hao-by-leetcode-solution/）
 思路：（https://leetcode-cn.com/problems/merge-two-sorted-lists/solution/he-bing-
 liang-ge-you-xu-lian-biao-by-leetcode-solu/）
 
-<<<<<<< Updated upstream
+28. 实现 strStr() KMP 算法
+思路：（https://leetcode-cn.com/problems/implement-strstr/solution/shi-xian-strst
+r-by-leetcode-solution-ds6y/）
+
+69. x 的平方根
+思路：（https://leetcode-cn.com/problems/sqrtx/solution/x-de-ping-fang-gen-by-lee
+tcode-solution/）
+
 1108. IP 地址无效化
 思路：（https://leetcode-cn.com/problems/defanging-an-ip-address/solution/1108-ip
 -di-zhi-wu-xiao-hua-jsti-jie-by-s-rzxp/）
@@ -41,12 +48,3 @@ liang-ge-you-xu-lian-biao-by-leetcode-solu/）
 3. 无重复字符的最长子串
 思路：（https://leetcode-cn.com/problems/longest-substring-without-repeating-char
 acters/solution/wu-zhong-fu-zi-fu-de-zui-chang-zi-chuan-by-leetc-2/）
-=======
-28. 实现 strStr() KMP 算法
-思路：（https://leetcode-cn.com/problems/implement-strstr/solution/shi-xian-strst
-r-by-leetcode-solution-ds6y/）
-
-69. x 的平方根
-思路：（https://leetcode-cn.com/problems/sqrtx/solution/x-de-ping-fang-gen-by-lee
-tcode-solution/）
->>>>>>> Stashed changes

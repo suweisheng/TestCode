@@ -366,3 +366,100 @@ class Solution(object):
 # ret = Solution().removeDuplicates(nums)
 # print ret
 # print nums
+
+class Solution:
+    def threeSum(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[List[int]]
+        """
+        nums.sort()
+        res, k = [], 0
+        # 左右指针在两端(k+1, len); k范围[0, len-2]
+        for k in range(len(nums) - 2):
+            if nums[k] > 0:
+                break # because of j > i > k.
+            if k > 0 and nums[k] == nums[k - 1]:
+                continue # skip the same `nums[k]`.
+            i = k + 1
+            j = len(nums) - 1
+            while i < j:
+                s = nums[k] + nums[i] + nums[j]
+                if s < 0:
+                    i += 1
+                    while i < j and nums[i] == nums[i - 1]:
+                        i += 1
+                elif s > 0:
+                    j -= 1
+                    while i < j and nums[j] == nums[j + 1]:
+                        j -= 1
+                else:
+                    res.append([nums[k], nums[i], nums[j]])
+                    i += 1
+                    j -= 1
+                    while i < j and nums[i] == nums[i - 1]:
+                        i += 1
+                    while i < j and nums[j] == nums[j + 1]:
+                        j -= 1
+        return res
+# nums = [-1,0,1,2,-1,-4]
+# nums = []
+# nums = [0]
+# ret = Solution().threeSum(nums)
+# print ret
+
+class Solution(object):
+    def removeNthFromEnd(self, head, n):
+        """
+        :type head: ListNode
+        :type n: int
+        :rtype: ListNode
+        """
+        ############################## method 1
+        # 计算链表长度
+        # def getLength(head):
+        #     length = 0
+        #     while head:
+        #         head = head.next
+        #         length += 1
+        #     return length
+        # # 添加了哑节点，那么头节点的前驱节点就是哑节点本身，此时我们就只需要考虑通用
+        # # 的情况即可。
+        # dummy = ListNode(-1, head)
+        # length = getLength(head)
+        # cur = dummy
+        # for i in xrange(1, length+1-n):
+        #     cur = cur.next
+        # cur.next = cur.next.next
+        # return dummy.next
+        ############################## method 2
+        # 栈概念
+        # dummy = ListNode(-1, head)
+        # stack = list()
+        # cur = dummy
+        # while cur:
+        #     stack.append(cur)
+        #     cur = cur.next
+        # for i in xrange(n):
+        #     stack.pop()
+        # prev = stack[-1]
+        # prev.next = prev.next.next
+        # return dummy.next
+        ############################## method 2
+        # 双指针
+        dummy = ListNode(-1, head)
+        second = dummy
+        first = head
+        for i in xrange(n):
+            first = first.next
+        while first:
+            first = first.next
+            second = second.next
+        second.next = second.next.next
+        return dummy.next
+# head = BuildListNode([1,2,3,4])
+# n = 2
+# ret = Solution().removeNthFromEnd(head, n)
+# while ret:
+#     print ret.val
+    # ret = ret.next

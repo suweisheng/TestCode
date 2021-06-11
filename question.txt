@@ -60,3 +60,7 @@ tion/shan-chu-pai-xu-shu-zu-zhong-de-zhong-fu-tudo/）
 19. 删除链表的倒数第 N 个结点
 思路：（https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list/solutio
 n/shan-chu-lian-biao-de-dao-shu-di-nge-jie-dian-b-61/）
+
+50. Pow(x, n)
+思路：（https://leetcode-cn.com/problems/powx-n/solution/powx-n-by-leetcode-solut
+ion/）

@@ -463,3 +463,35 @@ class Solution(object):
 # while ret:
 #     print ret.val
     # ret = ret.next
+
+class Solution(object):
+    def myPow(self, x, n):
+        """
+        :type x: float
+        :type n: int
+        :rtype: float
+        """
+        ############################## method 1
+        # 快速幂
+        def quickMul(N):
+            if N == 0:
+                return 1
+            y = quickMul(N // 2)
+            return y * y if N % 2 == 0 else y * y * x
+        return quickMul(n) if n >= 0 else 1 / quickMul(-n)
+        ############################## method 2
+        if x == 0: return 0
+        res = 1
+        if n < 0:
+            x = 1 / x
+            n = -n
+        while n:
+            if n & 1:
+                res *= x
+            x *= x
+            n >>= 1
+        return res
+x = 2
+n = 5
+ret = Solution().myPow(x, n)
+print ret

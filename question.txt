@@ -65,6 +65,19 @@ n/shan-chu-lian-biao-de-dao-shu-di-nge-jie-dian-b-61/）
 思路：（https://leetcode-cn.com/problems/powx-n/solution/powx-n-by-leetcode-solut
 ion/）
 
+23. 合并K个升序链表
+思路：（https://leetcode-cn.com/problems/merge-k-sorted-lists/solution/he-bing-kg
+e-pai-xu-lian-biao-by-leetcode-solutio-2/）
+
+4. 寻找两个正序数组的中位数
+思路：（https://leetcode-cn.com/problems/median-of-two-sorted-arrays/solution/xun
+-zhao-liang-ge-you-xu-shu-zu-de-zhong-wei-s-114/）
+
+22. 括号生成
+思路：（https://leetcode-cn.com/problems/generate-parentheses/solution/gua-hao-sh
+eng-cheng-by-leetcode-solution/）
+https://ke.qq.com/course/package/35548
+
 29. 两数相除
 思路：（https://leetcode-cn.com/problems/divide-two-integers/solution/po-su-de-xi
 ang-fa-mei-you-wei-yun-suan-mei-you-yi-/）

@@ -496,6 +496,199 @@ class Solution(object):
 # ret = Solution().myPow(x, n)
 # print ret
 
+
+def mergeKLists(self, lists):
+    """
+    :type lists: List[ListNode]
+    :rtype: ListNode
+    """
+    ############################## method 1
+    # 顺序合并
+    def mergeTwoLists(l1, l2):
+        prehead = ListNode(-1)
+        prev = prehead
+        while l1 and l2:
+            if l1.val <= l2.val:
+                prev.next= l1
+                l1 = l1.next
+            else:
+                prev.next = l2
+                l2 = l2.next
+            prev = prev.next
+        prev.next = l1 if l1 else l2
+        return prehead.next
+
+    # tail = ListNode(-1)
+    # for node in lists:
+    #     tail = mergeTwoLists(tail, node)
+    # return tail.next
+    ############################## method 2
+    # 分治合并,递归
+    # if not lists:
+    #     return None
+    # def mergeList(lists, l, r):
+    #     print l, r
+    #     if l == r:
+    #         return lists[l]
+    #     mid = (l + r) >> 1
+    #     one = mergeList(lists, l, mid)
+    #     two = mergeList(lists, mid+1, r)
+    #     return mergeTwoLists(one, two)
+    # return mergeList(lists, 0, len(lists)-1)
+    ############################## method 3
+    # 迭代
+    if not lists:
+        return None
+    k = len(lists)
+    while k > 1:
+        idx = 0
+        for i in xrange(0, k, 2):
+            if i+1 == k:
+                lists[idx] = lists[i]
+            else:
+                lists[idx] = mergeTwoLists(lists[i], lists[i+1])
+            idx += 1
+        k = idx
+    return lists[0]
+# a = BuildListNode([1,5,7,10,12])
+# b = BuildListNode([1,2,7,10,12])
+# c = BuildListNode([1,5,7,10,12])
+# lists = [a,b,c]
+# ret = Solution().mergeKLists(lists)
+# while ret:
+#     print ret.val
+#     ret = ret.next
+
+class Solution(object):
+    def findMedianSortedArrays(self, nums1, nums2):
+        """
+        :type nums1: List[int]
+        :type nums2: List[int]
+        :rtype: float
+        """
+        ############################## method 1
+        # 双指针
+        # nums1_len, nums2_len = len(nums1), len(nums2)
+        # if nums1_len + nums2_len == 0:
+        #     return None
+        # div, mod = divmod((nums1_len+nums2_len), 2)
+        # l_p, r_p = 0, 0
+        # value1, value2 = None, None
+        # for i in xrange(div+1):
+        #     value1 = value2
+        #     if l_p == nums1_len:
+        #         value2 = nums2[r_p]
+        #         r_p += 1
+        #     elif r_p == nums2_len:
+        #         value2 = nums1[l_p]
+        #         l_p += 1
+        #     else:
+        #         if nums1[l_p] < nums2[r_p]:
+        #             value2 = nums1[l_p]
+        #             l_p += 1
+        #         else:
+        #             value2 = nums2[r_p]
+        #             r_p += 1
+        # if mod == 0:
+        #     return (value1+value2) / 2.0
+        # else:
+        #     return float(value2)
+        ############################## method 2
+        # 分治,二分法,尾递归
+        def getKthElement(k):
+            index1, index2 = 0, 0
+            while True:
+                # 特殊情况
+                if index1 == m:
+                    return nums2[index2 + k - 1]
+                if index2 == n:
+                    return nums1[index1 + k - 1]
+                if k == 1:
+                    return min(nums1[index1], nums2[index2])
+
+                # 正常情况
+                newIndex1 = min(index1 + k // 2 - 1, m - 1)
+                newIndex2 = min(index2 + k // 2 - 1, n - 1)
+                pivot1, pivot2 = nums1[newIndex1], nums2[newIndex2]
+                if pivot1 <= pivot2:
+                    k -= newIndex1 - index1 + 1
+                    index1 = newIndex1 + 1
+                else:
+                    k -= newIndex2 - index2 + 1
+                    index2 = newIndex2 + 1
+
+        m, n = len(nums1), len(nums2)
+        totalLength = m + n
+        if totalLength % 2 == 1:
+            return float(getKthElement((totalLength + 1) // 2))
+        else:
+            left = getKthElement(totalLength // 2)
+            right = getKthElement(totalLength // 2 + 1)
+            return (left+right) / 2.0
+
+        ############################## method 3
+        # if len(nums1) > len(nums2):
+        #     nums1, nums2 = nums2, nums1
+        # infinty = 2**40
+        # m, n = len(nums1), len(nums2)
+        # left, right = 0, m
+        # # median1：前一部分的最大值
+        # # median2：后一部分的最小值
+        # median1, median2 = 0, 0
+
+        # while left <= right:
+        #     # 前一部分包含 nums1[0 .. i-1] 和 nums2[0 .. j-1]
+        #     # // 后一部分包含 nums1[i .. m-1] 和 nums2[j .. n-1]
+        #     i = (left + right) // 2
+        #     j = (m + n + 1) // 2 - i
+
+        #     # nums_im1, nums_i, nums_jm1, nums_j 分别表示
+        #     # nums1[i-1], nums1[i], nums2[j-1], nums2[j]
+        #     nums_im1 = (-infinty if i == 0 else nums1[i - 1])
+        #     nums_i = (infinty if i == m else nums1[i])
+        #     nums_jm1 = (-infinty if j == 0 else nums2[j - 1])
+        #     nums_j = (infinty if j == n else nums2[j])
+
+        #     if nums_im1 <= nums_j:
+        #         median1 = max(nums_im1, nums_jm1)
+        #         median2 = min(nums_i, nums_j)
+        #         left = i + 1
+        #     else:
+        #         right = i - 1
+        # if (m + n) % 2 == 0:
+        #     return (median1 + median2) / 2.0
+        # else:
+        #     return float(median1)
+# nums1 = [1,2,5,6,7,8]
+# nums2 = [3,4]
+# ret = Solution().findMedianSortedArrays(nums1, nums2)
+# print ret
+
+class Solution(object):
+    def generateParenthesis(self, n):
+        """
+        :type n: int
+        :rtype: List[str]
+        """
+        # 动态规划
+        # dp[i]表示i组括号的所有有效组合
+        # dp[i] = "(dp[p]的所有有效组合)+【dp[q]的组合】"，其中 1 + p + q = i ,
+        # p从0遍历到i-1, q则相应从i-1到0
+        dp = [[] for _ in range(n+1)]         # dp[i]存放i组括号的所有有效组合
+        print dp
+        dp[0] = [""]                          # 初始化dp[0]
+        for i in xrange(1, n+1):               # 计算dp[i]
+            for p in xrange(i):                # 遍历p
+                l1 = dp[p]                    # 得到dp[p]的所有有效组合
+                l2 = dp[i-1-p]                # 得到dp[q]的所有有效组合
+                for k1 in l1:
+                    for k2 in l2:
+                        dp[i].append("({0}){1}".format(k1, k2))
+        return dp[n]
+# n = 3
+# ret = Solution().generateParenthesis(n)
+# print ret
+
 class Solution(object):
     def divide(self, dividend, divisor):
         """

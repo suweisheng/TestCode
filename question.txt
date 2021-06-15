@@ -64,3 +64,7 @@ n/shan-chu-lian-biao-de-dao-shu-di-nge-jie-dian-b-61/）
 50. Pow(x, n)
 思路：（https://leetcode-cn.com/problems/powx-n/solution/powx-n-by-leetcode-solut
 ion/）
+
+29. 两数相除
+思路：（https://leetcode-cn.com/problems/divide-two-integers/solution/po-su-de-xi
+ang-fa-mei-you-wei-yun-suan-mei-you-yi-/）

@@ -491,7 +491,45 @@ class Solution(object):
             x *= x
             n >>= 1
         return res
-x = 2
-n = 5
-ret = Solution().myPow(x, n)
-print ret
+# x = 2
+# n = 5
+# ret = Solution().myPow(x, n)
+# print ret
+
+class Solution(object):
+    def divide(self, dividend, divisor):
+        """
+        :type dividend: int
+        :type divisor: int
+        :rtype: int
+        """
+        def div(a, b):
+            if a < b: return 0
+            count = 1
+            tb = b
+            while (tb+tb) <= a:
+                count += count
+                tb += tb
+            return count + div(a-tb, b)
+        if dividend == 0: return 0
+        if divisor == 1: return dividend
+        if divisor == -1:
+            if dividend == -1<<31:
+                return (1<<31) - 1
+            else:
+                return -dividend
+        sign = 1
+        if (dividend > 0 and divisor < 0) or (dividend < 0 and divisor > 0):
+            sign = -1
+        dividend = dividend if dividend > 0 else -dividend
+        divisor = divisor if divisor > 0 else -divisor
+
+        res = div(dividend, divisor)
+        if sign == 1:
+            return res
+        else:
+            return -res
+# dividend = 7
+# divisor = -3
+# ret = Solution().divide(dividend, divisor)
+# print ret

@@ -81,3 +81,7 @@ https://ke.qq.com/course/package/35548
 29. 两数相除
 思路：（https://leetcode-cn.com/problems/divide-two-integers/solution/po-su-de-xi
 ang-fa-mei-you-wei-yun-suan-mei-you-yi-/）
+
+36. 有效的数独
+思路：（https://leetcode-cn.com/problems/valid-sudoku/solution/you-xiao-de-shu-du
+-by-leetcode/）

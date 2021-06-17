@@ -764,3 +764,49 @@ class Solution(object):
 # ]
 # ret = Solution().isValidSudoku(board)
 # print ret
+
+class Solution(object):
+    def myAtoi(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        state = "start"
+        sign = 1
+        ans = 0
+        # 状态机
+        tb = {
+            "start" : ["start", "signed", "in_number", "end"],
+            "signed" : ["end", "end", "in_number", "end"],
+            "in_number" : ["end", "end", "in_number", "end"],
+            "end" : ["end", "end", "end", "end"],
+        }
+        INT_MAX = (1 << 31) - 1
+        INT_MIN = - (1 << 31)
+        for c in s:
+            index = None
+            if c.isspace():
+                index = 0
+            elif c == "+" or c == "-":
+                index = 1
+            elif c.isdigit():
+                index = 2
+            else:
+                index = 3
+            state = tb[state][index]
+            if state == "in_number":
+                if (ans > (INT_MAX//10)
+                    or (ans == (INT_MAX//10) and int(c) > 7)):
+                    if sign == 1:
+                        return INT_MAX
+                    else:
+                        return INT_MIN
+                ans = ans * 10 + int(c)
+            elif state == "signed":
+                sign = 1 if c == "+" else -1
+            elif state == "end":
+                break
+        return sign * ans
+# s = "2147483648"
+# ret = Solution().myAtoi(s)
+# print ret

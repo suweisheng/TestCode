@@ -85,3 +85,6 @@ ang-fa-mei-you-wei-yun-suan-mei-you-yi-/）
 36. 有效的数独
 思路：（https://leetcode-cn.com/problems/valid-sudoku/solution/you-xiao-de-shu-du
 -by-leetcode/）
+
+8. 字符串转换整数 (atoi)
+思路：（）

@@ -87,4 +87,9 @@ ang-fa-mei-you-wei-yun-suan-mei-you-yi-/）
 -by-leetcode/）
 
 8. 字符串转换整数 (atoi)
-思路：（）
+思路：（https://leetcode-cn.com/problems/string-to-integer-atoi/solution/zi-fu-c
+huan-zhuan-huan-zheng-shu-atoi-by-leetcode-/）
+
+46. 全排列
+思路：（https://leetcode-cn.com/problems/permutations/solution/quan-pai-lie-by-l
+eetcode-solution-2/）

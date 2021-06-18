@@ -674,7 +674,6 @@ class Solution(object):
         # dp[i] = "(dp[p]的所有有效组合)+【dp[q]的组合】"，其中 1 + p + q = i ,
         # p从0遍历到i-1, q则相应从i-1到0
         dp = [[] for _ in range(n+1)]         # dp[i]存放i组括号的所有有效组合
-        print dp
         dp[0] = [""]                          # 初始化dp[0]
         for i in xrange(1, n+1):               # 计算dp[i]
             for p in xrange(i):                # 遍历p
@@ -810,3 +809,43 @@ class Solution(object):
 # s = "2147483648"
 # ret = Solution().myAtoi(s)
 # print ret
+
+class Solution(object):
+    def permute(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[List[int]]
+        """
+        ############################## method 1
+        # 动态规划
+        # length = len(nums)
+        # dp = [[] for x in xrange(length)]
+        # dp[0] = [nums[0:1]]
+        # for i in xrange(1, length):
+        #     insert_list = [nums[i]]
+        #     for _list in dp[i-1]:
+        #         _len = len(_list)
+        #         for j in xrange(_len+1):
+        #             temp = _list[0:j] + insert_list + _list[j:_len]
+        #             dp[i].append(temp)
+        # return dp[length-1]
+        ############################## method 2
+        # 回溯
+        def backtrack(first = 0):
+            # 所有数都填完了
+            if first == n:  
+                res.append(nums[:])
+            for i in range(first, n):
+                # 动态维护数组
+                nums[first], nums[i] = nums[i], nums[first]
+                # 继续递归填下一个数
+                backtrack(first + 1)
+                # 撤销操作
+                nums[first], nums[i] = nums[i], nums[first]
+        n = len(nums)
+        res = []
+        backtrack()
+        return res
+# nums = [1,2,3,4,5,6]
+# ret = Solution().permute(nums)
+# print len(ret)

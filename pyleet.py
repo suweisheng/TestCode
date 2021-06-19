@@ -849,3 +849,61 @@ class Solution(object):
 # nums = [1,2,3,4,5,6]
 # ret = Solution().permute(nums)
 # print len(ret)
+
+class Solution(object):
+    def searchRange(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: List[int]
+        """
+        ############################## method 1
+        # l, r = 0, len(nums)-1
+        # index = None
+        # while l <= r:
+        #     mid = l + (r - l) // 2
+        #     if nums[mid] < target:
+        #         l = mid + 1
+        #     elif nums[mid] > target:
+        #         r = mid - 1
+        #     else:
+        #         index = mid
+        #         break
+        # if index == None:
+        #     return [-1, -1]
+        # start = end = index
+        # while start >= 1:
+        #     if nums[start-1] == target:
+        #         start -= 1
+        #     else:
+        #         break
+        # while (end+1) < len(nums):
+        #     if nums[end+1] == target:
+        #         end += 1
+        #     else:
+        #         break
+        # return [start, end]
+        ############################## method 2
+        def binarySearch(nums, target, lower):
+            length = len(nums)
+            left, right = 0, length-1
+            ans = length
+            while left <= right:
+                mid = left + (right-left) / 2
+                if target < nums[mid] or (lower and target <= nums[mid]):
+                    right = mid - 1
+                    ans = mid
+                else:
+                    left = mid + 1
+            return ans
+        # 第一个 >= target 的数
+        leftIdx = binarySearch(nums, target, True)
+        if leftIdx >= len(nums) or nums[leftIdx] != target:
+            return [-1, -1]
+        # 第一个 > target 的数 -1
+        rightIdx = binarySearch(nums, target, False) - 1
+        return [leftIdx, rightIdx]
+# nums = [1,1,1,1,1,2]
+# target = 32
+# ret = Solution().searchRange(nums, target)
+# print ret

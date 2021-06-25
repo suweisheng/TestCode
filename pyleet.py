@@ -1073,3 +1073,26 @@ class Solution(object):
 # digits = "23"
 # ret = Solution().letterCombinations(digits)
 # print ret
+
+class Solution(object):
+    def subsets(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[List[int]]
+        """
+        length = len(nums)
+        def dfs(index):
+            if index == length:
+                combinations.append(list(combination))
+                return
+            combination.append(nums[index])
+            dfs(index+1)
+            combination.pop()
+            dfs(index+1)
+        combinations = list()
+        combination = list()
+        dfs(0)
+        return combinations
+nums = [1,2,3]
+ret = Solution().subsets(nums)
+print ret

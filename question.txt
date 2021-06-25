@@ -117,3 +117,7 @@ hao-zhong-fu-shu-by-leetcode-solution/）
 17. 电话号码的字母组合
 思路：（https://leetcode-cn.com/problems/letter-combinations-of-a-phone-number/so
 lution/c-dfs-bao-mu-ji-zhu-shi-by-atori-gi9k/）
+
+78. 子集
+思路：（https://leetcode-cn.com/problems/subsets/solution/zi-ji-by-leetcode-solu
+tion/）

@@ -286,6 +286,31 @@ local function test()
     print("test success !")
 end
 
-test()
+-- test()
+
+local tb = {-1,7,2,2,0,1,3,1}
+local function aa(tb)
+    local n = #tb
+    if n <= 2 then
+        if tb[1] > tb[2] then
+            return tb[1], tb[2]
+        else
+            return tb[2], tb[1]
+        end
+    end
+    local first, second = tb[1], tb[2]
+    if first < second then
+        first, second = second, first
+    end
+    for i=3, n do
+        if tb[i] > first then
+            first, second = tb[i], first
+        elseif tb[i] > second then
+            second = tb[i]
+        end
+    end
+    return first, second
+end
+print(aa(tb))
 
 return M

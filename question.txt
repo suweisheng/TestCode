@@ -101,3 +101,19 @@ in-sorted-array/solution/zai-pai-xu-shu-zu-zhong-cha-zhao-yuan-su-de-di-3-4/）
 33. 搜索旋转排序数组
 思路：（https://leetcode-cn.com/problems/search-in-rotated-sorted-array/solution
 /）
+
+5. 最长回文子串
+思路：（https://leetcode-cn.com/problems/longest-palindromic-substring/solution/z
+ui-chang-hui-wen-zi-chuan-by-leetcode-solution/）
+
+11. 盛最多水的容器
+思路：（https://leetcode-cn.com/problems/container-with-most-water/solution/sheng
+-zui-duo-shui-de-rong-qi-by-leetcode-solution/）
+
+287. 寻找重复数
+思路：（https://leetcode-cn.com/problems/find-the-duplicate-number/solution/xun-z
+hao-zhong-fu-shu-by-leetcode-solution/）
+
+17. 电话号码的字母组合
+思路：（https://leetcode-cn.com/problems/letter-combinations-of-a-phone-number/so
+lution/c-dfs-bao-mu-ji-zhu-shi-by-atori-gi9k/）

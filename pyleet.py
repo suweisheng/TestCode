@@ -938,3 +938,138 @@ class Solution(object):
 # target = 1
 # ret = Solution().search(nums, target)
 # print ret
+
+class Solution(object):
+    def longestPalindrome(self, s):
+        """
+        :type s: str
+        :rtype: str
+        """
+        n = len(s)
+        if n < 2:
+            return s
+        dp = [[False]*n for _ in xrange(n)]
+        res = s[0]
+        for i in xrange(n):
+            dp[i][i] = True
+        # 子串长度
+        for L in xrange(2, n+1):
+            # 枚举左边界，左边界的上限设置可以宽松一些
+            # 如果右边界越界，就可以退出当前循环
+            for i in xrange(n-L+1):
+                # 由 L 和 i 可以确定右边界，即 j - i + 1 = L 得
+                j = L + i - 1
+                if s[i] == s[j]:
+                    if j - i < 3:
+                        dp[i][j] = True
+                    else:
+                        dp[i][j] = dp[i+1][j-1]
+                else:
+                    dp[i][j] = False
+                if dp[i][j] and L > len(res):
+                    res = s[i:j+1]
+        return res
+# s = "bdb"
+# ret = Solution().longestPalindrome(s)
+# print ret
+
+class Solution(object):
+    def maxArea(self, height):
+        """
+        :type height: List[int]
+        :rtype: int
+        """
+        l, r = 0, len(height) - 1
+        ans = 0
+        while l < r:
+            area = min(height[l], height[r]) * (r - l)
+            ans = max(ans, area)
+            if height[l] <= height[r]:
+                l += 1
+            else:
+                r -= 1
+        return ans
+# height = [1,8,6,2,5,4,8,3,7]
+# ret = Solution().maxArea(height)
+# print ret
+
+class Solution(object):
+    def findDuplicate(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        ############################## method 1
+        # 二分查找
+        # n = len(nums)
+        # l, r = 0, n-1
+        # ans = -1
+        # while l <= r:
+        #     mid = (l + r) // 2
+        #     cnt = 0
+        #     for x in nums:
+        #         if x <= mid:
+        #             cnt += 1
+        #     if cnt <= mid:
+        #         l = mid + 1
+        #     else:
+        #         r = mid - 1
+        #         ans = mid
+        # return ans
+        ############################## method 2
+        # 快慢指针
+        slow, fast = 0, 0
+        while True:
+            slow = nums[slow]
+            fast = nums[nums[fast]]
+            if slow == fast: break
+        # 寻找起始点
+        slow = 0
+        while True:
+            slow = nums[slow]
+            fast = nums[fast]
+            if slow == fast: break
+        return slow
+# nums = [4,3,2,1,4]
+# ret = Solution().findDuplicate(nums)
+# print ret
+
+class Solution(object):
+    def letterCombinations(self, digits):
+        """
+        :type digits: str
+        :rtype: List[str]
+        """
+        ############################## method 1
+        # 深度优先搜索、递归的思想
+        if not digits:
+            return []
+        phoneMap = {
+            "2": "abc",
+            "3": "def",
+            "4": "ghi",
+            "5": "jkl",
+            "6": "mno",
+            "7": "pqrs",
+            "8": "tuv",
+            "9": "wxyz",
+        }
+        n = len(digits)
+        if n < 1:
+            return list()
+        def backtrack(index):
+            if index == n:
+                combinations.append("".join(combination))
+            else:
+                digit = digits[index]
+                for letter in phoneMap[digit]:
+                    combination.append(letter)
+                    backtrack(index + 1)
+                    combination.pop()
+        combinations = list()
+        combination = list()
+        backtrack(0)
+        return combinations
+# digits = "23"
+# ret = Solution().letterCombinations(digits)
+# print ret

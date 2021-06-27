@@ -121,3 +121,19 @@ lution/c-dfs-bao-mu-ji-zhu-shi-by-atori-gi9k/）
 78. 子集
 思路：（https://leetcode-cn.com/problems/subsets/solution/zi-ji-by-leetcode-solu
 tion/）
+
+38. 外观数列
+思路：（https://leetcode-cn.com/problems/count-and-say/solution/python-yi-kan-jiu
+-dong-fang-fa-by-superz-0t6q/）
+
+48. 旋转图像
+思路：（https://leetcode-cn.com/problems/rotate-image/solution/xuan-zhuan-tu-xian
+g-by-leetcode-solution-vu3m/#comment）
+
+49. 字母异位词分组
+思路：（https://leetcode-cn.com/problems/group-anagrams/solution/zi-mu-yi-wei-ci-
+fen-zu-by-leetcode-solut-gyoc/）
+
+62. 不同路径
+思路：（https://leetcode-cn.com/problems/unique-paths/solution/bu-tong-lu-jing-by
+-leetcode-solution-hzjf/）

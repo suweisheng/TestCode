@@ -1083,16 +1083,110 @@ class Solution(object):
         length = len(nums)
         def dfs(index):
             if index == length:
-                combinations.append(list(combination))
+                ans.append(list(path))
                 return
-            combination.append(nums[index])
+            path.append(nums[index])
             dfs(index+1)
-            combination.pop()
+            path.pop()
             dfs(index+1)
-        combinations = list()
-        combination = list()
+        ans = list()
+        path = list()
         dfs(0)
-        return combinations
-nums = [1,2,3]
-ret = Solution().subsets(nums)
-print ret
+        return ans
+# nums = [1,2,3]
+# ret = Solution().subsets(nums)
+# print ret
+
+class Solution(object):
+    def countAndSay(self, n):
+        """
+        :type n: int
+        :rtype: str
+        """
+        def pingjiestr(_str):
+            num, count = _str[0], 1
+            ans = ""
+            for i in xrange(1, len(_str)):
+                if num == _str[i]:
+                    count += 1
+                else:
+                    ans += str(count) + str(num)
+                    num = _str[i]
+                    count = 1
+            ans += str(count) + str(num)
+            return ans
+
+        pre_ans = "1"
+        for i in xrange(n-1):
+            pre_ans = pingjiestr(pre_ans)
+        return pre_ans
+# n = 30
+# ret = Solution().countAndSay(n)
+# print ret
+
+class Solution(object):
+    def rotate(self, matrix):
+        """
+        :type matrix: List[List[int]]
+        :rtype: None Do not return anything, modify matrix in-place instead.
+        """
+        ############################## method 1
+        # 暴力解，要额外开辟等额的空间
+        # n = len(matrix)
+        # matrix_new = [[0] * n for _ in range(n)]
+        # for i in range(n):
+        #     for j in range(n):
+        #         matrix_new[j][n - i - 1] = matrix[i][j]
+        # # 不能写成 matrix = matrix_new
+        # matrix[:] = matrix_new
+        ############################## method 2
+        n = len(matrix)
+        for i in xrange(n//2):
+            for j in xrange((n+1)//2):
+                print i, j
+                temp = matrix[i][j];
+                matrix[i][j] = matrix[n-j-1][i]
+                matrix[n-j-1][i] = matrix[n-i-1][n-j-1]
+                matrix[n-i-1][n-j-1] = matrix[j][n-i-1]
+                matrix[j][n-i-1] = temp
+# matrix = [[1,2,3,4],[5,6,7,8],[9,10,11,12],[13,14,15,16]]
+# ret = Solution().rotate(matrix)
+# print matrix
+
+class Solution(object):
+    def groupAnagrams(self, strs):
+        """
+        :type strs: List[str]
+        :rtype: List[List[str]]
+        """
+        import collections
+        ret = collections.defaultdict(list)
+        for _str in strs:
+            key = "".join(sorted(_str))
+            ret[key].append(_str)
+        return ret.values()
+# strs = ["eat", "tea", "tan", "ate", "nat", "bat"]
+# ret = Solution().groupAnagrams(strs)
+# print ret
+
+class Solution(object):
+    def uniquePaths(self, m, n):
+        """
+        :type m: int
+        :type n: int
+        :rtype: int
+        """
+        # f = [[1] * n] + [[1] + [0] * (n - 1) for _ in range(m - 1)]
+        f = [[0 for _ in xrange(n)] for _ in xrange(m)]
+        for i in xrange(m):
+            f[i][0] = 1
+        for i in xrange(n):
+            f[0][i] = 1
+        for i in xrange(1, m):
+            for j in xrange(1, n):
+                f[i][j] = f[i-1][j] + f[i][j-1]
+        return f[m-1][m-1]
+# m = 4
+# n = 5
+# ret = Solution().uniquePaths(m, n)
+# print ret

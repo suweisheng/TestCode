@@ -121,3 +121,27 @@ lution/c-dfs-bao-mu-ji-zhu-shi-by-atori-gi9k/）
 78. 子集
 思路：（https://leetcode-cn.com/problems/subsets/solution/zi-ji-by-leetcode-solu
 tion/）
+
+54. 螺旋矩阵
+思路：（https://leetcode-cn.com/problems/spiral-matrix/solution/luo-xuan-ju-zhen-
+by-leetcode-solution/）
+
+53. 最大子序和
+思路：（https://leetcode-cn.com/problems/maximum-subarray/solution/zui-da-zi-xu-h
+e-by-leetcode-solution/）
+
+55. 跳跃游戏
+思路：（https://leetcode-cn.com/problems/jump-game/solution/tiao-yue-you-xi-by-le
+etcode-solution/）
+
+75. 颜色分类
+思路：（https://leetcode-cn.com/problems/sort-colors/solution/yan-se-fen-lei-by-l
+eetcode-solution/）
+
+56. 合并区间
+思路：（https://leetcode-cn.com/problems/merge-intervals/solution/he-bing-qu-jian
+-by-leetcode-solution/）
+
+9. 回文数
+思路：（https://leetcode-cn.com/problems/palindrome-number/solution/hui-wen-shu-b
+y-leetcode-solution/）

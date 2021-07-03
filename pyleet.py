@@ -1083,16 +1083,224 @@ class Solution(object):
         length = len(nums)
         def dfs(index):
             if index == length:
-                combinations.append(list(combination))
+                combinations.append(list(path))
                 return
-            combination.append(nums[index])
+            # 当前数可选，也可以不选
+            # 1.不选，直接进入下一层
             dfs(index+1)
-            combination.pop()
+            # 2.选了有，进入下一层
+            path.append(nums[index])
             dfs(index+1)
+            path.pop()
         combinations = list()
-        combination = list()
+        path = list()
         dfs(0)
         return combinations
-nums = [1,2,3]
-ret = Solution().subsets(nums)
-print ret
+# nums = [1,2,3]
+# ret = Solution().subsets(nums)
+# print ret
+
+class Solution(object):
+    def spiralOrder(self, matrix):
+        """
+        :type matrix: List[List[int]]
+        :rtype: List[int]
+        """
+        ############################## method 1
+        # l, r, t, b = 0, n-1, 0, m-1
+        # ret = []
+        # num, tar = 1, n*n
+        # while num >= 1:
+        #     # 从左到右
+        #     for i in xrange(l, r+1):
+        #         if num < 1: break
+        #         ret.append(matrix[t][i])
+        #         num -= 1
+        #     # 从上到下
+        #     t += 1
+        #     for i in xrange(t, b+1):
+        #         if num < 1: break
+        #         ret.append(matrix[i][r])
+        #         num -= 1
+        #     # 从右到左
+        #     r -= 1
+        #     for i in xrange(r, l-1, -1):
+        #         ret.append(matrix[b][i])
+        #         num -= 1
+        #     # 从下到上
+        #     b -= 1
+        #     for i in xrange(b, top-1, -1):
+        #         ret.append(matrix[b][i])
+        #         num -= 1
+        #     l += 1
+        # return ret
+        ############################## method 2
+        if not matrix or not matrix[0]:
+            return list()
+        rows, columns = len(matrix), len(matrix[0])
+        order = list()
+        left, right, top, bottom = 0, columns - 1, 0, rows - 1
+        while left <= right and top <= bottom:
+            for column in range(left, right + 1):
+                order.append(matrix[top][column])
+            for row in range(top + 1, bottom + 1):
+                order.append(matrix[row][right])
+            if left < right and top < bottom:
+                for column in range(right - 1, left, -1):
+                    order.append(matrix[bottom][column])
+                for row in range(bottom, top, -1):
+                    order.append(matrix[row][left])
+            left, right, top, bottom = left + 1, right - 1, top + 1, bottom - 1
+        return order
+# matrix = [[1,2,3],[4,5,6],[7,8,9]]
+# ret = Solution().spiralOrder(matrix)
+# print ret
+
+class Solution(object):
+    def maxSubArray(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        ############################## method 1
+        # 动态规划
+        pre = 0
+        maxAns = nums[0]
+        for x in nums:
+            pre = max(pre+x, x)
+            maxAns = max(maxAns, pre)
+        return maxAns
+        ############################## method 2
+        # 分治
+        def getInfo(a, l, r):
+            if l == r:
+                # 对于一个区间 [l,r]，我们可以维护四个量：
+                return {
+                    "lsum":a[l], # 表示 [l,r] 内以 l 为左端点的最大子段和
+                    "rSum":a[l], # 表示 [l,r] 内以 r 为右端点的最大子段和
+                    "mSum":a[l], # 表示 [l,r] 内的最大子段和
+                    "iSum":a[l], # 表示 [l,r] 的区间和
+                }
+            m = (l + r) // 2
+            lSub = getInfo(a, l, m)
+            rSub = getInfo(a, m+1, r)
+            return pushUp(lSub, rSub)
+        def pushUp(l, r):
+            iSum = l["iSum"] + r["iSum"]
+            lSum = max(l["lSum"], l["iSum"]+r["lSum"])
+            rSum = max(r["rSum"], r["iSum"]+l["iSum"])
+            mSum = max(max(l["mSum"], r["mSum"]), l["rSum"]+r["rSum"])
+            return {
+                "lsum":lSum,
+                "rSum":rSum,
+                "mSum":a[l],
+                "iSum":iSum,
+            }
+
+        return getInfo(nums, 0, len(nums) - 1).mSum
+# nums = [1,3,-2,5,6,-1]
+# ret = Solution().maxSubArray(nums)
+# print ret
+
+class Solution(object):
+    def canJump(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: bool
+        """
+        ############################## method 1
+        # 贪心算法
+        rightmost = 0
+        for i in range(len(nums)):
+            if i > rightmost:
+                return False
+            rightmost = max(rightmost, i+nums[i])
+        return True
+# nums = [3,2,1,0,4]
+# ret = Solution().canJump(nums)
+# print ret
+
+class Solution(object):
+    def sortColors(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: None Do not return anything, modify nums in-place instead.
+        """
+        ############################## method 1
+        # 单指针
+        # n = len(nums)
+        # p0 = 0
+        # for i in xrange(n):
+        #     if nums[i] == 0:
+        #         nums[i], nums[p0] = nums[p0], nums[i]
+        #         p0 += 1
+        # for i in xrange(n):
+        #     if nums[i] == 1:
+        #         nums[i], nums[p0] = nums[p0], nums[i]
+        #         p0 += 1
+        ############################## method 2
+        # 双指针 两侧
+        # left, right, i = 0, len(nums)-1, 0
+        # while i <= right:
+        #     if nums[i] == 0:
+        #         nums[i], nums[left] = nums[left], nums[i]
+        #         left += 1
+        #     if nums[i] == 2:
+        #         nums[i], nums[right] = nums[right], nums[i]
+        #         right -= 1
+        #         i -= 1
+        #     i += 1
+        # 双指针 同侧
+        n = len(nums)
+        p0 = p1 = 0
+        for i in range(n):
+            if nums[i] == 1:
+                nums[i], nums[p1] = nums[p1], nums[i]
+                p1 += 1
+            elif nums[i] == 0:
+                nums[i], nums[p0] = nums[p0], nums[i]
+                if p0 < p1:
+                    nums[i], nums[p1] = nums[p1], nums[i]
+                p0 += 1
+                p1 += 1
+# nums = [1,1,2,0,1,0,1,0,2]
+# ret = Solution().sortColors(nums)
+# print nums
+
+class Solution(object):
+    def merge(self, intervals):
+        """
+        :type intervals: List[List[int]]
+        :rtype: List[List[int]]
+        """
+        list.sort(intervals, key = lambda x : x[0])
+        merged = list()
+        for interval in intervals:
+            if not merged:
+                merged.append(interval)
+            else:
+                if interval[0] > merged[-1][1]:
+                    merged.append(interval)
+                else:
+                    merged[-1][1] = max(merged[-1][1], interval[1])
+        return merged
+# intervals = [[2,6],[1,3],[15,18],[8,10],[12,20]]
+# ret = Solution().merge(intervals)
+# print ret
+
+class Solution(object):
+    def isPalindrome(self, x):
+        """
+        :type x: int
+        :rtype: bool
+        """
+        if x < 0 or (x != 0 and x % 10 == 0):
+            return False
+        reverNum = 0
+        while x > reverNum:
+            reverNum = reverNum * 10 + x % 10
+            x = x // 10
+        return x == reverNum or x == reverNum // 10
+# x = 1211
+# ret = Solution().isPalindrome(x)
+# print ret

@@ -161,3 +161,7 @@ eetcode-solution/）
 9. 回文数
 思路：（https://leetcode-cn.com/problems/palindrome-number/solution/hui-wen-shu-b
 y-leetcode-solution/）
+
+73. 矩阵置零
+思路：（https://leetcode-cn.com/problems/set-matrix-zeroes/solution/ju-zhen-zhi-l
+ing-by-leetcode-solution-9ll7/）

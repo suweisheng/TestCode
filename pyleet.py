@@ -1397,3 +1397,59 @@ class Solution(object):
 # x = 1211
 # ret = Solution().isPalindrome(x)
 # print ret
+
+class Solution(object):
+    def setZeroes(self, matrix):
+        """
+        :type matrix: List[List[int]]
+        :rtype: None Do not return anything, modify matrix in-place instead.
+        """
+        ############################## method 1
+        # m, n = len(matrix), len(matrix[0])
+        # row_set, column_set = set(), set()
+        # for row in xrange(m):
+        #     for column in xrange(n):
+        #         if matrix[row][column] == 0:
+        #             row_set.add(row)
+        #             column_set.add(column)
+        # for row in xrange(m):
+        #     for column in xrange(n):
+        #         if row in row_set or column in column_set:
+        #             matrix[row][column] = 0
+        ############################## method 2
+        # m, n = len(matrix), len(matrix[0])
+        # # 使用两个标记变量分别记录第一行和第一列是否原本包含 00
+        # flag_col0 = any(matrix[i][0] == 0 for i in range(m))
+        # flag_row0 = any(matrix[0][j] == 0 for j in range(n))
+        # # 用矩阵的第一行和第一列代替方法一中的两个标记数组
+        # for i in range(1, m):
+        #     for j in range(1, n):
+        #         if matrix[i][j] == 0:
+        #             matrix[i][0] = matrix[0][j] = 0
+        # for i in range(1, m):
+        #     for j in range(1, n):
+        #         if matrix[i][0] == 0 or matrix[0][j] == 0:
+        #             matrix[i][j] = 0
+        # if flag_col0:
+        #     for i in range(m):
+        #         matrix[i][0] = 0
+        # if flag_row0:
+        #     for j in range(n):
+        #         matrix[0][j] = 0
+        ############################## method 3
+        flag_col = False
+        row, col = len(matrix), len(matrix[0])
+        for i in range(row):
+            if matrix[i][0] == 0: flag_col = True
+            for j in range(1, col):
+                if matrix[i][j] == 0:
+                    matrix[i][0] = matrix[0][j] = 0
+        
+        for i in range(row - 1, -1, -1):
+            for j in range(col - 1, 0, -1):
+                if matrix[i][0] == 0 or matrix[0][j] == 0:
+                    matrix[i][j] = 0
+            if flag_col == True: matrix[i][0] = 0
+matrix = [[1,1,1],[1,0,1],[1,1,1]]
+ret = Solution().setZeroes(matrix)
+print matrix

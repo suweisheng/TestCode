@@ -165,3 +165,23 @@ y-leetcode-solution/）
 73. 矩阵置零
 思路：（https://leetcode-cn.com/problems/set-matrix-zeroes/solution/ju-zhen-zhi-l
 ing-by-leetcode-solution-9ll7/）
+
+202. 快乐数
+思路：（https://leetcode-cn.com/problems/happy-number/solution/kuai-le-shu-by-lee
+tcode-solution/）
+
+91. 解码方法
+思路：（https://leetcode-cn.com/problems/decode-ways/solution/jie-ma-fang-fa-by-l
+eetcode-solution-p8np/）
+
+98. 验证二叉搜索树
+思路：（https://leetcode-cn.com/problems/validate-binary-search-tree/solution/yan
+-zheng-er-cha-sou-suo-shu-by-leetcode-solution/）
+
+128. 最长连续序列
+思路：（https://leetcode-cn.com/problems/longest-consecutive-sequence/solution/zu
+i-chang-lian-xu-xu-lie-by-leetcode-solution/）
+
+41. 缺失的第一个正数
+思路：（https://leetcode-cn.com/problems/first-missing-positive/solution/que-shi-
+de-di-yi-ge-zheng-shu-by-leetcode-solution/）

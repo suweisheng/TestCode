@@ -14,6 +14,33 @@ def BuildListNode(_list):
         prev = prev.next
     return prehead.next
 
+class TreeNode(object):
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+def BuildTreeNode(_list):
+    n = len(_list)
+    def build(i):
+        if i >= n:
+            return None
+        return TreeNode(_list[i], build(2*i+1), build(2*i+2))
+    return build(0)
+
+def ConvTreeNode(root):
+    ret, _list = [], [root]
+    while _list:
+        temp = []
+        for x in _list:
+            ret.append(x.val)
+            if x.left:
+                temp.append(x.left)
+            if x.right:
+                temp.append(x.right)
+        _list = temp
+    return ret
+
 class Solution(object):
     def twoSum(self, nums, target):
         """
@@ -1450,6 +1477,149 @@ class Solution(object):
                 if matrix[i][0] == 0 or matrix[0][j] == 0:
                     matrix[i][j] = 0
             if flag_col == True: matrix[i][0] = 0
-matrix = [[1,1,1],[1,0,1],[1,1,1]]
-ret = Solution().setZeroes(matrix)
-print matrix
+# matrix = [[1,1,1],[1,0,1],[1,1,1]]
+# ret = Solution().setZeroes(matrix)
+# print matrix
+
+class Solution(object):
+    def isHappy(self, n):
+        """
+        :type n: int
+        :rtype: bool
+        """
+        ############################## method 1
+        # def getNext(n):
+        #     num = 0
+        #     while n > 0:
+        #         n, digit = divmod(n, 10)
+        #         num += digit ** 2
+        #     return num
+
+        # seen = set()
+        # while n != 1 or n not in seen:
+        #     seen.add(n)
+        #     n = getNext(n)
+        # return n == 1
+        ############################## method 2
+        # 洛伊德循环查找算法、快慢指针
+        # def get_next(number):
+        #     total_sum = 0
+        #     while number > 0:
+        #         number, digit = divmod(number, 10)
+        #         total_sum += digit ** 2
+        #     return total_sum
+
+        # slow_runner = n
+        # fast_runner = get_next(n)
+        # while fast_runner != 1 and slow_runner != fast_runner:
+        #     slow_runner = get_next(slow_runner)
+        #     fast_runner = get_next(get_next(fast_runner))
+        # return fast_runner == 1
+        ############################## method 3
+        # 只作了解
+        cycle_members = {4, 16, 37, 58, 89, 145, 42, 20}
+        def get_next(number):
+            total_sum = 0
+            while number > 0:
+                number, digit = divmod(number, 10)
+                total_sum += digit ** 2
+            return total_sum
+
+        while n != 1 and n not in cycle_members:
+            n = get_next(n)
+
+        return n == 1
+# n = 333
+# ret = Solution().isHappy(n)
+# print ret
+
+class Solution(object):
+    def numDecodings(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        n = len(s)
+        # f[i-2], f[i-1], f[i]
+        a, b, c = 0, 1, 0
+        for i in range(1, n + 1):
+            c = 0
+            if s[i - 1] != '0':
+                c += b
+            if i > 1 and s[i - 2] != '0' and int(s[i-2:i]) <= 26:
+                c += a
+            a, b = b, c
+        return c
+# s = "333"
+# ret = Solution().numDecodings(s)
+# print ret
+
+class Solution(object):
+    def isValidBST(self, root):
+        """
+        :type root: TreeNode
+        :rtype: bool
+        """
+        def helper(node, lower=float('-inf'), upper=float('inf')):
+            if not node:
+                return True
+            val = node.val
+            if val <= lower or val >= upper:
+                return False
+            if not helper(node.right, val, upper):
+                return False
+            if not helper(node.left, lower, val):
+                return False
+            return True
+        return helper(root)
+# root = BuildTreeNode([1,2,3,4,None,5,6,7,None])
+# ret = Solution().isValidBST(root)
+# print ret
+
+class Solution(object):
+    def longestConsecutive(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        longest_streak = 0
+        num_set = set(nums)
+        for num in num_set:
+            if num - 1 not in num_set:
+                current_num = num
+                current_streak = 1
+
+                while current_num + 1 in num_set:
+                    current_num += 1
+                    current_streak += 1
+
+                longest_streak = max(longest_streak, current_streak)
+        return longest_streak
+# nums = [1,2,3]
+# ret = Solution().longestConsecutive(nums)
+# print ret
+
+class Solution(object):
+    def firstMissingPositive(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        n = len(nums)
+        for i in range(n):
+            if nums[i] <= 0:
+                nums[i] = n + 1
+        
+        for i in range(n):
+            num = abs(nums[i])
+            if num <= n:
+                nums[num - 1] = -abs(nums[num - 1])
+        
+        for i in range(n):
+            if nums[i] > 0:
+                return i + 1
+        
+        return n + 1
+# nums = [1,2,3]
+# ret = Solution().firstMissingPositive(nums)
+# print ret

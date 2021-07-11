@@ -1623,3 +1623,75 @@ class Solution(object):
 # nums = [1,2,3]
 # ret = Solution().firstMissingPositive(nums)
 # print ret
+
+class Solution(object):
+    def isPalindrome(self, s):
+        """
+        :type s: str
+        :rtype: bool
+        """
+        n = len(s)
+        left, right = 0, n - 1
+        while left < right:
+            while left < right and not s[left].isalnum():
+                left += 1
+            while left < right and not s[right].isalnum():
+                right -= 1
+            if left < right:
+                if s[left].lower() != s[right].lower():
+                    return False
+                left, right = left + 1, right - 1
+        return True
+# s = "A man, a plan, a canal: Panama"
+# ret = Solution().isPalindrome(s)
+# print ret
+
+
+class MinStack(object):
+    def __init__(self):
+        """
+        initialize your data structure here.
+        """
+        self.stack = []
+        self.min_stack = []
+
+    def push(self, val):
+        """
+        :type val: int
+        :rtype: None
+        """
+        self.stack.append(val)
+        if self.min_stack:
+
+            self.min_stack.append(min(val, self.min_stack[-1]))
+        else:
+            self.min_stack.append(val)
+
+    def pop(self):
+        """
+        :rtype: None
+        """
+        self.stack.pop()
+        self.min_stack.pop()
+
+
+    def top(self):
+        """
+        :rtype: int
+        """
+        return self.stack[-1]
+
+
+    def getMin(self):
+        """
+        :rtype: int
+        """
+        return self.min_stack[-1]
+
+# Your MinStack object will be instantiated and called as such:
+# obj = MinStack()
+# obj.push(5)
+# obj.pop()
+# param_3 = obj.top()
+# param_4 = obj.getMin()
+# print param_4

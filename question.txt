@@ -185,3 +185,11 @@ i-chang-lian-xu-xu-lie-by-leetcode-solution/）
 41. 缺失的第一个正数
 思路：（https://leetcode-cn.com/problems/first-missing-positive/solution/que-shi-
 de-di-yi-ge-zheng-shu-by-leetcode-solution/）
+
+125. 验证回文串
+思路：（https://leetcode-cn.com/problems/valid-palindrome/solution/yan-zheng-hui-
+wen-chuan-by-leetcode-solution/）
+
+155. 最小栈
+思路：（https://leetcode-cn.com/problems/min-stack/solution/zui-xiao-zhan-by-leet
+code-solution/）

@@ -193,3 +193,27 @@ wen-chuan-by-leetcode-solution/）
 155. 最小栈
 思路：（https://leetcode-cn.com/problems/min-stack/solution/zui-xiao-zhan-by-leet
 code-solution/）
+
+121. 买卖股票的最佳时机
+思路：（https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/solution
+/121-mai-mai-gu-piao-de-zui-jia-shi-ji-by-leetcode-/）
+
+162. 寻找峰值
+思路：（https://leetcode-cn.com/problems/find-peak-element/solution/xun-zhao-feng
+-zhi-by-leetcode/）
+
+139. 单词拆分
+思路：（https://leetcode-cn.com/problems/word-break/solution/dan-ci-chai-fen-by-l
+eetcode-solution/）
+
+191. 位1的个数
+思路：（https://leetcode-cn.com/problems/number-of-1-bits/solution/wei-1de-ge-shu
+-by-leetcode-solution-jnwf/）
+
+102. 二叉树的层序遍历
+思路：（https://leetcode-cn.com/problems/binary-tree-level-order-traversal/soluti
+on/er-cha-shu-de-ceng-xu-bian-li-by-leetcode-solution/）
+
+103. 二叉树的锯齿形层序遍历
+思路：（https://leetcode-cn.com/problems/binary-tree-zigzag-level-order-traversal
+/solution/er-cha-shu-de-ju-chi-xing-ceng-xu-bian-l-qsun/）

@@ -23,7 +23,7 @@ class TreeNode(object):
 def BuildTreeNode(_list):
     n = len(_list)
     def build(i):
-        if i >= n:
+        if i >= n or _list[i] == None:
             return None
         return TreeNode(_list[i], build(2*i+1), build(2*i+2))
     return build(0)
@@ -1646,8 +1646,8 @@ class Solution(object):
 # ret = Solution().isPalindrome(s)
 # print ret
 
-
 class MinStack(object):
+    ############################## method 1
     def __init__(self):
         """
         initialize your data structure here.
@@ -1662,7 +1662,6 @@ class MinStack(object):
         """
         self.stack.append(val)
         if self.min_stack:
-
             self.min_stack.append(min(val, self.min_stack[-1]))
         else:
             self.min_stack.append(val)
@@ -1687,7 +1686,54 @@ class MinStack(object):
         :rtype: int
         """
         return self.min_stack[-1]
+    ############################## method 2
+    def __init__(self):
+        """
+        initialize your data structure here.
+        """
+        self.stack = []
+        self.min_value = None
 
+    def push(self, val):
+        """
+        :type val: int
+        :rtype: None
+        """
+        if self.stack:
+            diff = val - self.min_value
+            self.stack.append(diff)
+            if diff <= 0:
+                self.min_value = val
+        else:
+            self.stack.append(0)
+            self.min_value = val
+
+    def pop(self):
+        """
+        :rtype: None
+        """
+        diff = self.stack.pop()
+        if diff < 0:
+            top = self.min_value
+            self.min_value = top - diff
+            return top
+        else:
+            return self.min_value + diff
+
+    def top(self):
+        """
+        :rtype: int
+        """
+        if self.stack[-1] < 0:
+            return self.min_value
+        else:
+            return self.min_value + self.stack[-1]
+
+    def getMin(self):
+        """
+        :rtype: int
+        """
+        return self.min_value
 # Your MinStack object will be instantiated and called as such:
 # obj = MinStack()
 # obj.push(5)
@@ -1695,3 +1741,268 @@ class MinStack(object):
 # param_3 = obj.top()
 # param_4 = obj.getMin()
 # print param_4
+
+class Solution(object):
+    def maxProfit(self, prices):
+        """
+        :type prices: List[int]
+        :rtype: int
+        """
+        ############################## method 1
+        # 暴力法
+        # n = len(prices)
+        # max_value = 0
+        # for i in xrange(n):
+        #     for j in xrange(i+1, n):
+        #         value = prices[j] - prices[i]
+        #         if value > 0 and value > max_value:
+        #             max_value = value
+        # return max_value
+        ############################## method 2
+        # 动态规划 dp[i]=max(dp[i−1],prices[i]−minprice)
+        # n = len(prices)
+        # if n == 0:
+        #     return 0 # 边界条件
+        # dp = [0] * n
+        # minprice = prices[0]
+        # for i in range(1, n):
+        #     minprice = min(minprice, prices[i])
+        #     dp[i] = max(dp[i - 1], prices[i] - minprice)
+        # return dp[-1]
+        ############################## method 3
+        # 动态规划 优化调dP
+        minprice = float('inf')
+        maxprofit = 0
+        for price in prices:
+            minprice = min(minprice, price)
+            maxprofit = max(maxprofit, price - minprice)
+        return maxprofit
+# prices = [7,1,2,6,4,5]
+# ret = Solution().maxProfit(prices)
+# print ret
+
+class Solution(object):
+    def findPeakElement(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        ############################## method 1
+        # for i in xrange(len(nums)-1):
+        #     if nums[i] > nums[i+1]:
+        #         return i
+        # return len(nums) - 1
+        ############################## method 2
+        left, right = 0, len(nums)-1
+        while left < right:
+            mid = (left + right) // 2
+            if nums[mid] > nums[mid+1]:
+                right = mid
+            else:
+                left = mid + 1
+        return left
+# nums = [7,1,2,6,4,5]
+# ret = Solution().findPeakElement(nums)
+# print ret
+
+class Solution(object):
+    def wordBreak(self, s, wordDict):
+        """
+        :type s: str
+        :type wordDict: List[str]
+        :rtype: bool
+        """
+        ############################## method 1
+        # 动态规划
+        n = len(s)
+        dp = [False] * (n+1)
+        dp[0] = True
+        for i in xrange(n):
+            for j in xrange(i+1, n+1):
+                if dp[i] and s[i:j] in wordDict:
+                    dp[j] = True
+        return dp[-1]
+        ############################## method 2
+        # 记忆化回溯
+        def back_track(s):
+            if not s:
+                return True
+            res = False
+            for i in range(1, len(s)+1):
+                if(s[:i] in wordDict):
+                    res = back_track(s[i:]) or res
+            return res
+        return back_track(s)
+# s = "fsdfsd"
+# wordDict = ["fds","fds"]
+# ret = Solution().wordBreak(s, wordDict)
+# print ret
+
+class Solution(object):
+    def hammingWeight(self, n):
+        """
+        :type n: int
+        :rtype: int
+        """
+        ret = 0
+        while n:
+            n &= n - 1
+            ret += 1
+        return ret
+# n = 30
+# ret = Solution().hammingWeight(n)
+# print ret
+
+class Solution(object):
+    def levelOrder(self, root):
+        """
+        :type root: TreeNode
+        :rtype: List[List[int]]
+        """
+        ############################## method 1
+        # if not root:
+        #     return []
+        # ret, root_list = [], [root]
+        # while root_list:
+        #     child_list, next_root = [], []
+        #     for x in root_list:
+        #         child_list.append(x.val)
+        #         if x.left:
+        #             next_root.append(x.left)
+        #         if x.right:
+        #             next_root.append(x.right)
+        #     root_list = next_root
+        #     ret.append(child_list)
+        # return ret
+        ############################## method 2
+        # BFS
+        if not root:
+            return []
+        res = []
+        queue = [root]
+        while queue:
+            size = len(queue)
+            tmp = []
+            for _ in xrange(size):
+                r = queue.pop(0)
+                tmp.append(r.val)
+                if r.left:
+                    queue.append(r.left)
+                if r.right:
+                    queue.append(r.right)
+            res.append(tmp)
+        return res
+# root = BuildTreeNode([1])
+# ret = Solution().levelOrder(root)
+# print ret
+
+class Solution(object):
+    def zigzagLevelOrder(self, root):
+        """
+        :type root: TreeNode
+        :rtype: List[List[int]]
+        """
+        ############################## method 1
+        # 提前逆序
+        # if not root:
+        #     return []
+        # res = []
+        # queue = [root]
+        # flag = True
+        # while queue:
+        #     size = len(queue)
+        #     tmp = [0] * size
+        #     for i in xrange(size):
+        #         r = queue.pop(0)
+        #         if flag:
+        #             tmp[i] = r.val
+        #         else:
+        #             tmp[size-i-1] = r.val
+        #         if r.left:
+        #             queue.append(r.left)
+        #         if r.right:
+        #             queue.append(r.right)
+        #     flag = not flag
+        #     res.append(tmp)
+        # return res
+        ############################## method 2
+        # 翻转列表
+        # if not root:
+        #     return []
+        # res = []
+        # queue = [root]
+        # flag = True
+        # while queue:
+        #     size = len(queue)
+        #     tmp = []
+        #     for _ in xrange(size):
+        #         r = queue.pop(0)
+        #         tmp.append(r.val)
+        #         if r.left:
+        #             queue.append(r.left)
+        #         if r.right:
+        #             queue.append(r.right)
+        #     if not flag:
+        #         tmp.reverse()
+        #     flag = not flag
+        #     res.append(tmp)
+        # return res
+        ############################## method 3
+        # 双端队列
+        # if not root:
+        #     return []
+        # res = []
+        # queue = [root]
+        # flag = True
+        # while queue:
+        #     size = len(queue)
+        #     tmp = []
+        #     for _ in xrange(size):
+        #         if flag:
+        #             r = queue.pop(0)
+        #             tmp.append(r.val)
+        #             if r.left:
+        #                 queue.append(r.left)
+        #             if r.right:
+        #                 queue.append(r.right)
+        #         else:
+        #             r = queue.pop()
+        #             tmp.append(r.val)
+        #             if r.right:
+        #                 queue.insert(1, r.right)
+        #             if r.left:
+        #                 queue.insert(1, r.left)
+        #     flag = not flag
+        #     res.append(tmp)
+        # return res
+        ############################## method 3
+        # 只操作栈
+        if not root:
+            return []
+        res = []
+        stack = [root]
+        flag = True
+        while stack:
+            size = len(stack)
+            tmp = []
+            next_stack = []
+            for _ in xrange(size):
+                r = stack.pop()
+                tmp.append(r.val)
+                if flag:
+                    if r.left:
+                        next_stack.append(r.left)
+                    if r.right:
+                        next_stack.append(r.right)
+                else:
+                    if r.right:
+                        next_stack.append(r.right)
+                    if r.left:
+                        next_stack.append(r.left)
+            stack = next_stack
+            flag = not flag
+            res.append(tmp)
+        return res
+# root = BuildTreeNode([3,9,20,None,None,15,7])
+# ret = Solution().zigzagLevelOrder(root)
+# print ret

@@ -1648,44 +1648,44 @@ class Solution(object):
 
 class MinStack(object):
     ############################## method 1
-    def __init__(self):
-        """
-        initialize your data structure here.
-        """
-        self.stack = []
-        self.min_stack = []
+    # def __init__(self):
+    #     """
+    #     initialize your data structure here.
+    #     """
+    #     self.stack = []
+    #     self.min_stack = []
 
-    def push(self, val):
-        """
-        :type val: int
-        :rtype: None
-        """
-        self.stack.append(val)
-        if self.min_stack:
-            self.min_stack.append(min(val, self.min_stack[-1]))
-        else:
-            self.min_stack.append(val)
+    # def push(self, val):
+    #     """
+    #     :type val: int
+    #     :rtype: None
+    #     """
+    #     self.stack.append(val)
+    #     if self.min_stack:
+    #         self.min_stack.append(min(val, self.min_stack[-1]))
+    #     else:
+    #         self.min_stack.append(val)
 
-    def pop(self):
-        """
-        :rtype: None
-        """
-        self.stack.pop()
-        self.min_stack.pop()
-
-
-    def top(self):
-        """
-        :rtype: int
-        """
-        return self.stack[-1]
+    # def pop(self):
+    #     """
+    #     :rtype: None
+    #     """
+    #     self.stack.pop()
+    #     self.min_stack.pop()
 
 
-    def getMin(self):
-        """
-        :rtype: int
-        """
-        return self.min_stack[-1]
+    # def top(self):
+    #     """
+    #     :rtype: int
+    #     """
+    #     return self.stack[-1]
+
+
+    # def getMin(self):
+    #     """
+    #     :rtype: int
+    #     """
+    #     return self.min_stack[-1]
     ############################## method 2
     def __init__(self):
         """
